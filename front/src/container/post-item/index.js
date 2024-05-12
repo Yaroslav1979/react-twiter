@@ -11,7 +11,7 @@ import { Alert, Skeleton, LOAD_STATUS } from "../../component/load";
 
 import { getDate } from "../../util/getDate";
 
-export default function Container({ id, username, text, date, }) {
+export default function PostItem({ id, username, text, date, }) {
 
     const [data, setData] = useState({
      id,

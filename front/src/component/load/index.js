@@ -1,16 +1,25 @@
 import "./index.css";
 
-import Grid from "../grid";
+export const LOAD_STATUS = {
+    PROGRESS: "progress",
+    SUCCESS: "success",
+    ERROR: "error",
+};
 
-export default function Component ( {username, date, text} ) {
+export function Alert({ message, status = "default" }) {
+    return <div className={`alert alert--${status}`}> {message} </div>;
+};
+
+export function Loader() {
+    return <div className="loader"></div>;
+};
+
+export function Skeleton() {
     return (
-        <Grid>
-            <div className="post-content">
-                <span className="post-content__username">@{username}</span>
-                <span className="post-content__date">@{date}</span>
-            </div>
-
-            <p className="post-content__text">{text} </p>
-        </Grid>
-    )
-}
+    <div className="skeleton"> 
+        <div className="skeleton__item"></div>
+        <div className="skeleton__item"></div>
+        <div className="skeleton__item"></div>
+    </div>
+    );
+};

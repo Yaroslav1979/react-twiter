@@ -8,7 +8,7 @@ import PostCreate from "../post-create";
 import { Alert, Skeleton, LOAD_STATUS } from "../../component/load";
 
 import { getDate } from "../../util/getDate";
-import { PostItem } from "../post-item";
+import  PostItem from "../post-item";
 
 export default function Container() {
  const [status, setStatus] = useState(null);
