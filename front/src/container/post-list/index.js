@@ -4,10 +4,11 @@ import Title from "../../component/title";
 import Grid from "../../component/grid";
 import Box from "../../component/box";
 
-import PostCreate from "../post-create"
+import PostCreate from "../post-create";
 import { Alert, Skeleton, LOAD_STATUS } from "../../component/load";
 
-import { getDate } from "../../util/getDate"
+import { getDate } from "../../util/getDate";
+import { PostItem } from "../post-item";
 
 export default function Container() {
  const [status, setStatus] = useState(null);
@@ -45,6 +46,10 @@ export default function Container() {
         isEmpty: raw.list.length === 0,
     });
 
+    if (status === null) {
+        getData();
+    }
+
     return (
         <Grid>
             <Box>
@@ -71,6 +76,20 @@ export default function Container() {
 
             {status === LOAD_STATUS.ERROR && (
                 <Alert status={status} message={message} />
+            )}
+
+            {status === LOAD_STATUS.SUCCESS && (
+                <Fragment> 
+                    {data.isEmpty ? (
+                    <Alert message="Список постів пустий" />
+                    ) : (
+                        data.list.map((item) => (
+                            <Fragment  key={item.id}>
+                                <PostItem {...item} />
+                            </Fragment>
+                        ))
+                    )}    
+                </Fragment>
             )}
         </Grid>
     );

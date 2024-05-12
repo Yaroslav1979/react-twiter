@@ -13,10 +13,12 @@ class Post {
     }
 
     static create(username, text, post) {
-        const newPost = Post(username, text)
+        const newPost = new Post(username, text)
 
         if (post) {
             post.reply.push(newPost)
+
+            console.log(post)
         } else {
             this.#list.push(newPost)
         }
@@ -25,7 +27,7 @@ class Post {
 
     return newPost
     }
-    
+
     static getById(id) {
         return (
             this.#list.find((item) => item.id === Number(id)) || 
