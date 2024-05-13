@@ -22,7 +22,7 @@ export default function PostItem({ id, username, text, date }) {
     });
 
     const [status, setStatus] = useState(null);
-    const [messasge, setMessage] = useState("");
+    const [message, setMessage] = useState("");
 
     const getData = async () => {
         setStatus(LOAD_STATUS.PROGRESS);
@@ -35,29 +35,29 @@ export default function PostItem({ id, username, text, date }) {
                 setData(convertData(resData));
                 setStatus(LOAD_STATUS.SUCCESS);
             } else {
-                setMessage(resData.messasge);
+                setMessage(resData.message);
                 setStatus(LOAD_STATUS.ERROR);
             }
         } catch (error) {
-            setMessage(error.messasge);
+            setMessage(error.message);
             setStatus(LOAD_STATUS.ERROR);
         }
     };
 
-    const convertData = ({raw}) => ({
-        id: raw.post.id,        
-        username: raw.post.username,
-        text: raw.post.text,
-        date: getDate(raw.post.date),
+    const convertData = ({post}) => ({
+        id: post.id,        
+        username: post.username,
+        text: post.text,
+        date: getDate(post.date),
 
-        reply: raw.post.reply.reverce().map(({id, username, text, date}) => ({
+        reply: post.reply.reverce().map(({id, username, text, date}) => ({
           id,
           username,
           text,          
           date: getDate(date),
         })),
 
-        isEmpty: raw.post.reply.length === 0,
+        isEmpty: post.reply.length === 0,
     });
 
     const [isOpen, setOpen] = useState(false);
@@ -110,7 +110,7 @@ export default function PostItem({ id, username, text, date }) {
                 )}
 
                 {status === LOAD_STATUS.ERROR && (
-                    <Alert status={status} messasge={messasge} />
+                    <Alert status={status} message={message} />
                 )}
 
                 {status === LOAD_STATUS.SUCCESS &&
