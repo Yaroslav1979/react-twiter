@@ -17,8 +17,8 @@ export default function Container( {
     const [message, setMessage] = useState("");
 
     const handleSubmit = (value) => {
-        return sendData ({value});
-    };
+    return sendData({ value });
+  };
 
     const sendData = async (dataToSend) => {
         setStatus(LOAD_STATUS.PROGRESS);
