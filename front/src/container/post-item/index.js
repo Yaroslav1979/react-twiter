@@ -11,7 +11,7 @@ import { Alert, Skeleton, LOAD_STATUS } from "../../component/load";
 
 import { getDate } from "../../util/getDate";
 
-export default function PostItem({ id, username, text, date, }) {
+export default function PostItem({ id, username, text, date }) {
 
     const [data, setData] = useState({
      id,
@@ -44,20 +44,20 @@ export default function PostItem({ id, username, text, date, }) {
         }
     };
 
-    const convertData = ({post}) => ({
-        id: post.id,        
-        username: post.username,
-        text: post.text,
-        date: getDate(post.date),
+    const convertData = ({raw}) => ({
+        id: raw.post.id,        
+        username: raw.post.username,
+        text: raw.post.text,
+        date: getDate(raw.post.date),
 
-        reply: post.reply.reverce().map(({id, username, text, date}) => ({
+        reply: raw.post.reply.reverce().map(({id, username, text, date}) => ({
           id,
           username,
           text,          
           date: getDate(date),
         })),
 
-        isEmpty: post.reply.length === 0,
+        isEmpty: raw.post.reply.length === 0,
     });
 
     const [isOpen, setOpen] = useState(false);
@@ -66,11 +66,12 @@ export default function PostItem({ id, username, text, date, }) {
         if (status === null) {
             getData();
         }
+
         setOpen(!isOpen);
     };
     
      return (
-        <Box style={{ padding: "0" }} >
+        <Box style={{ padding: "0" }}>
             <div 
                 style={{
                  padding: "20px",

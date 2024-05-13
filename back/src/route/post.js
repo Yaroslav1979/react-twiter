@@ -83,7 +83,7 @@ router.get('/post-list', function (req, res) {
 
 router.get('/post-item', function (req, res) {
   try {
-    const id = req.query
+    const { id } = req.query
 
     if (!id) {
       return res.status(400).json({
